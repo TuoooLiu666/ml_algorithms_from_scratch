@@ -20,7 +20,8 @@ class LinearRegression:
             dw = (1/n_samples) * np.dot(X.T, (y_predicted - y))
             db = (1/n_samples) * np.sum(y_predicted - y)
             
-            self.weights -= self.lr * dw
+            # minus according to the direction of gradient
+            self.weights -= self.lr * dw 
             self.bias -= self.lr * db
             
     def predict(self, X):
