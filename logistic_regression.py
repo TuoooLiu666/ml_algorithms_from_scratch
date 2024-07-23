@@ -11,7 +11,7 @@ class LogisticRegression:
     def fit(self, X, y):
         # initiate parameters
         n_samples, n_features = X.shape
-        self.weights = np.zeros(n_features)
+        self.weights = np.zeros(shape=n_features)
         self.bias = 0
         
         # gradient descent
