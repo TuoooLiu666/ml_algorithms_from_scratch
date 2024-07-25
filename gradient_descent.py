@@ -12,20 +12,27 @@ y = 4 + 3 * X + np.random.rand()
 w = 0.0
 b = 0.0
 
-# initiate hyperparameters
+# initiate hyperparameters: learning rate
 lr = 0.001
 
 # create gradient descent function
-def gradient_descent(X, y, w, b, lr):
-    n_samples, n_featrue = X.shape
-    for xi, yi in zip(X, y):
-        # dw = 2(yhat-(wx+b))(-x)
-        dw = 2 * X.T.dot(X.dot(w) + b - y)
-        # db = 2(yhat-(wx+b))(-1)
-        db = 2 * np.sum(X.dot(w) + b - y) 
-        
-    w -= lr * dw * (1/n_samples)
-    b -= lr * db * (1/n_samples)
+def gradient_descent(X, y, w=w, b=b, lr=lr, n_iter=500):
+    n_samples = X.shape[0]
     
-    return w,b
-
+    for i in range(n_iter):    
+        
+        # prediction
+        y_predicted = np.dot(X, w) + b
+        #  loss
+        loss = np.mean((y - y_predicted)**2)
+        # calcualte derivatives
+        dw = -2 * np.dot(X.T, (y - y_predicted)) * (1/n_samples)
+        db = -2 * np.sum(y - y_predicted) * (1/n_samples)
+        
+        # UPDATE PARAMETERS by dradient descent rule
+        w -= lr * dw 
+        b -= lr * db 
+        
+        print(f"Iteration {i}: loss = {loss:.4f}, weights = {w[0][0]:.4f}, bias = {b:.4f}")    
+    
+gradient_descent(X=X, y=y, lr=0.01, n_iter=500)
