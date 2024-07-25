@@ -23,13 +23,12 @@ def gradient_descent(X, y, w=w, b=b, lr=lr, n_iter=500):
         
         # prediction
         y_predicted = np.dot(X, w) + b
-        #  loss
+        # calculate loss
         loss = np.mean((y - y_predicted)**2)
-        # calcualte derivatives
+        # calcualte derivatives and average gradient
         dw = -2 * np.dot(X.T, (y - y_predicted)) * (1/n_samples)
         db = -2 * np.sum(y - y_predicted) * (1/n_samples)
-        
-        # UPDATE PARAMETERS by dradient descent rule
+        # calcualte step size and UPDATE PARAMETERS by dradient descent rule
         w -= lr * dw 
         b -= lr * db 
         
